@@ -1,0 +1,16 @@
+.container_list {
+    /* background: #eee; */
+    display: grid;
+    grid-template-rows:40% 15px 200px;
+    grid-template-columns: 38% 58%;
+    grid-gap:10px 10px;
+    overflow: hidden;
+
+}
+
+.fit_grid {
+    width: 100%; /* ADD */
+    height:100%; /* ADD */
+    object-fit: contain;
+    overflow: hidden;
+}
