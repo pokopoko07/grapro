@@ -14,17 +14,37 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+    <body>
+        <div class="w-full container mx-auto p-6">
+            <div class="w-full flex items-center justify-between">
+                <a href="{{route('top')}}">
+                    <img src="{{asset('logo/arakashi_logo.png')}}"  style="max-height:80px;">
                 </a>
+                <div class="w-full container mx-auto p-6">
+                    <div class="w-full flex items-center justify-between">
+                <div class="flex w-1/2 justify-end content-center">
+                    {{-- ログイン・登録部分 --}}
+                    @if (Route::has('login'))
+                        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                        @auth
+                            <a href="{{ url('/post') }}" class="text-xl text-gray-700 dark:text-gray-500 underline">HOME</a>
+                        @else
+                            <a href="{{ route('login') }}" class="text-xl text-gray-700 dark:text-gray-500 underline font-bold text-base">ログイン</a>
+        
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="ml-4 text-xl text-gray-700 dark:text-gray-500 underline font-bold text-base">新規登録</a>
+                            @endif
+                        @endauth
+                        </div>
+                    @endif
+                    
+                </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+        </div>
+        <div class="font-sans text-gray-900 antialiased">
+            {{ $slot }}
         </div>
     </body>
 </html>
