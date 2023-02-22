@@ -49,4 +49,8 @@ class User extends Authenticatable
     public function areas() {
         return $this->hasMany(Area::class);
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
 }

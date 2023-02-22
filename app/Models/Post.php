@@ -40,6 +40,10 @@ class Post extends Model
         return $this->belongsTo(Area::class);
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
     public function getFacilityKubun() {
         $str="";
         if($this->park      ==true){

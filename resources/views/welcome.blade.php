@@ -11,10 +11,10 @@
                 　ぜひ、お気軽にご利用ください。
             </p>
         
-            <p class="text-blue-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">
+            {{-- <p class="text-blue-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">
                 会員募集中。お気軽にひょっこりきてください。
-            </p>
-            <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
+            </p> --}}
+            <div class="flex w-full justify-center md:justify-center pb-24 lg:pb-0 fade-in">
             {{-- ボタン設定 --}}
                 <a href="{{route('login')}}">
                     <x-primary-button class="mr-4 bg-blue-600 font-bold text-base text-center">
