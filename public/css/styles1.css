@@ -1,8 +1,8 @@
 .container_list {
     /* background: #eee; */
     display: grid;
-    grid-template-rows:40% 15px 200px;
-    grid-template-columns: 38% 58%;
+    grid-template-rows:50% 10% 30%;
+    grid-template-columns: 38% 55%;
     grid-gap:10px 10px;
     overflow: hidden;
 
@@ -13,4 +13,59 @@
     height:100%; /* ADD */
     object-fit: contain;
     overflow: hidden;
+}
+
+.item-5, .item-3, .item-4, .item-6{
+    border: 2px solid #000000;
+}
+
+.container_syousai {	
+    display: grid;
+    /* width: 600px;	
+    height: 300px; */
+    margin:1em;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;	/*何列あるか*/
+    grid-template-rows: 1fr 1fr 1fr 1fr;	/*何行あるか */
+    gap: 10px 30px;	
+    grid-template-areas:
+    "area1 area1 area2 area2 area2"
+    "area1 area1 area2 area2 area2"
+    "area3 area4 area2 area2 area2"
+    "area5 area6 area7 area8 area8"; 
+}
+
+/* .item1, .item2, .item3, .item4, .item5, .item6{		
+    border: 1px black solid;
+} */
+
+.item1 {
+    grid-area: area1;
+}
+
+.item2 {
+    grid-area: area2;
+}
+
+.item3 {
+    grid-area: area3;
+}
+
+.item4 {
+    grid-area: area4;
+}
+
+.item5 {
+    grid-area: area5;
+}
+
+.item6 {
+    grid-area: area6;
+}
+
+.item7 {
+    grid-area: area7;
+}
+
+.item8 {
+    grid-area: area8;
 }

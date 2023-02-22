@@ -46,7 +46,7 @@
 
                     <div class="w-full flex flex-col">
                         <label for="hpadress" class="font-semibold leading-none mt-4">HPアドレス</label>
-                        <input type="text" name="hp_adress" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="hpadress" placeholder="Enter hp adress">
+                        <input type="text" name="hp_adress" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="hpadress" value="{{old('hp_adress')}}" placeholder="Enter hp adress">
                     </div>
 
                     <div class="w-full flex flex-col">
@@ -84,10 +84,15 @@
                     <div class="w-full flex flex-col">
                         <label for="age_id" class="font-semibold leading-none mt-4">お勧め年代（お勧め度：１～５)</label>
                         <ul id="age_id">
-                            <li><label>　幼　　児　：<input type="text" name="infant"           class="w-16 py-2 placeholder-gray-300 border border-gray-300 rounded-md"></label></li>
-                            <li><label>小学生低学年：<input type="text" name="lower_grade"      class="w-16 py-2 placeholder-gray-300 border border-gray-300 rounded-md"></label></li>
-                            <li><label>小学生高学年：<input type="text" name="highter_grade"    class="w-16 py-2 placeholder-gray-300 border border-gray-300 rounded-md"></label></li>
-                            <li><label>中学生以上　：<input type="text" name="over13"           class="w-16 py-2 placeholder-gray-300 border border-gray-300 rounded-md"></label></li>
+                            <li><label>　幼　　児　：
+                                <input type="text" name="infant" class="w-16 py-2 placeholder-gray-300 border border-gray-300 rounded-md" value="{{old('infant')}}">
+                            </label></li>
+                            <li><label>小学生低学年：
+                                <input type="text" name="lower_grade" class="w-16 py-2 placeholder-gray-300 border border-gray-300 rounded-md" value="{{old('lower_grade')}}"></label></li>
+                            <li><label>小学生高学年：
+                                <input type="text" name="higher_grade" class="w-16 py-2 placeholder-gray-300 border border-gray-300 rounded-md" value="{{old('higher_grade')}}"></label></li>
+                            <li><label>中学生以上　：
+                                <input type="text" name="over13" class="w-16 py-2 placeholder-gray-300 border border-gray-300 rounded-md" value="{{old('over13')}}"></label></li>
                         </ul>
                     </div>
 
