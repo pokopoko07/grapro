@@ -249,6 +249,7 @@ class PostController extends Controller
     // 投稿記事を削除します
     public function destroy(Post $post)
     {
+        $post->comments()->delete();
         $post->delete();
         return redirect()->route('post.index')->with('message', '記事を削除しました');
     }

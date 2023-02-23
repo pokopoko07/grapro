@@ -136,14 +136,26 @@
                 {{-- コメント部分終わり --}}
 
                 {{-- コメント表示 --}}
-                @foreach ($post->comments as $comment)
+                {{--コメントを新しい順に表示させるため、連想配列を逆順にする--}}
+                @php
+                    $po_comme = $post->comments->reverse()->values();
+                @endphp
+                @foreach ($po_comme as $comment)
                 <div class="bg-white w-full  rounded-2xl px-10 py-8 shadow-lg hover:shadow-2xl transition duration-500 mt-8">
-                    {{$comment->body}}
-                    @if($comment->image_comme)
-                        <a href="{{ asset('storage/images/'.$comment->image_comme)}}"  data-lightbox="group">
-                            <img src="{{ asset('storage/images/'.$comment->image_comme)}}" class="w-1/4"> {{--mx-auto--}}
-                        </a>
-                    @endif
+                    <div class="grid grid-cols-4 gap-4">
+                        <div>
+                            @if($comment->image_comme)
+                                <a href="{{ asset('storage/images/'.$comment->image_comme)}}"  data-lightbox="group">
+                                    <img src="{{ asset('storage/images/'.$comment->image_comme)}}" class="w-full">{{--mx-auto--}}
+                                </a>
+                            @else
+                                <img src="{{ asset('logo/noimage.jpg')}}" class="w-full">
+                            @endif
+                        </div>
+                        <div class="text-left col-span-3">
+                            {{$comment->body}}
+                        </div>
+                    </div>
                     <div class="text-sm font-semibold flex flex-row-reverse">
                         <p> {{ $comment->user->name }} • {{$comment->created_at->diffForHumans()}}</p>
                     </div>
