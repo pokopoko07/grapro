@@ -11,6 +11,15 @@ class PostController extends Controller
     // 投稿された記事を、新しい順に表示させます
     public function index()
     {
+        $items=Area::all();
+        $param=[
+            'items_a' => $items
+        ];
+        return view('post.serch',$param);
+    }
+
+    public function result()
+    {
         $posts=Post::orderBy('created_at','desc')->get();
         $user=auth()->user();
         return view('post.index', compact('posts', 'user'));
