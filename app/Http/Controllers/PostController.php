@@ -136,12 +136,14 @@ class PostController extends Controller
             // 5.年代で検索
             // お勧め度が3以上のデータを検索
             $first=0;
-            for($i=0;$i<count($age);$i++){
-                if($first==0){
-                    $query->where($age[$i], '>', 3);
-                    $first=1;
-                }else{
-                    $query->orWhere($age[$i], '>', 3);
+            if(empty($age)==false){
+                for($i=0;$i<count($age);$i++){
+                    if($first==0){
+                        $query->where($age[$i], '>', 3);
+                        $first=1;
+                    }else{
+                        $query->orWhere($age[$i], '>', 3);
+                    }
                 }
             }
         })->orderBy('created_at', 'desc')->get();

@@ -29,9 +29,24 @@
             </div>
         </div>
         {{-- 右側 --}}
+        @php
+            // public/imagesディレクトリ内のファイル一覧を取得する
+            $files = \File::files(public_path('storage/images'));
+
+            // 取得したファイル一覧から、JPEGファイルだけをフィルタリングする
+            $jpeg_files = [];
+            foreach ($files as $file) {
+                if (in_array($file->getExtension(), ['jpg', 'jpeg'], true)) {
+                    $jpeg_files[] = $file->getFilename();
+                }
+            }
+        @endphp
         <div class="w-full xl:w-3/5 py-6 overflow-y-hidden">
-            <img class="w-5/6 mx-auto lg:mr-0 slide-in-bottom rounded-lg shadow-xl" src="{{asset('logo/welcome.jpg')}}">
+            <img id="slideshow" class="w-5/6 mx-auto lg:mr-0 slide-in-bottom rounded-lg shadow-xl" src="{{asset('logo/welcome.jpg')}}">
         </div>
+        {{-- <div class="w-full xl:w-3/5 py-6 overflow-y-hidden">
+            <img class="w-5/6 mx-auto lg:mr-0 slide-in-bottom rounded-lg shadow-xl" src="{{asset('logo/welcome.jpg')}}">
+        </div> --}}
     </div>
     <div class="container pt-10 md:pt-18 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div class="w-full text-sm text-center md:text-left fade-in border-2 p-4 text-red-800 leading-8 mb-8">
@@ -43,5 +58,17 @@
         </div>
     </div>
 </div>
+<script>
+    let images = {!! json_encode($jpeg_files) !!};
+    let index = 0;
+    setInterval(function() {
+        // 画像を順次表示する
+        index = (index + 1) % images.length;
+        let url = "{{ asset('storage/images') }}/" + images[index];
+        console.log(url);
+        document.getElementById('slideshow').src = url;
+    }, 3000);
+
+</script>
     </body>
 </x-guest-layout>

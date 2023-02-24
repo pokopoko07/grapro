@@ -14,7 +14,7 @@
                 <form method="post" action="/result" enctype="multipart/form-data">
                     @csrf
                     <table class="border w-3/4 mt-8">
-                        <tr><th class="mt-4">単語で検索：<br>（3単語まで 半角の","カンマで単語を区切ってください）</th>
+                        <tr><th class="mt-4">単語で検索：<br>（複数単語可：カンマもしくはスペースで区切って下さい）</th>
                             <td class="w-3/4">
                                 <div class="md:flex items-center mt-4">
                                     <input type="text" name="word" class="w-3/4 py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="word" value="{{old('word')}}" placeholder="複数ある場合は、「,」で区切って入力して下さい。例)遊具,公園">
