@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Area;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -18,9 +19,133 @@ class PostController extends Controller
         return view('post.serch',$param);
     }
 
-    public function result()
+    public function result(Request $request)
     {
-        $posts=Post::orderBy('created_at','desc')->get();
+        // 1.単語検索
+        // 1.1入力されたデータを成形して、word[]に入力します
+        $word = str_replace('、', ',', $request->word);
+        $word = str_replace(' ',  ',', $word);
+        $word = str_replace('　',  ',', $word);
+        $word = explode(",",$word);
+        for($i=0;$i<count($word);$i++){
+            $word[$i]=trim($word[$i]);
+        }
+
+        // 2.施設区分で検索
+        // 2.1 得られたデータをわかりやすく変数に入れます
+        $facility   = $request->facility_name;
+
+        // 3.地域で検索
+        // 3.1　得られたデータをわかりやすく変数に入れます
+        $area       = $request->area_name;
+
+        // 4.犬ＯＫかで検索
+        $dogs       = $request->dogs;
+
+        // 5.年代で検索
+        $age        = $request->age_name;
+
+        $posts      = Post::where(function($query) use ($word) {
+            // 1.2単語の数だけ、where文を作成します
+            for($i=0;$i<count($word);$i++){
+                if($i==0){
+                    $query->where('title', 'LIKE', "%$word[$i]%")
+                    ->orWhere('body', 'LIKE', "%$word[$i]%");
+                }else{
+                    $query->orWhere('title', 'LIKE', "%$word[$i]%")
+                    ->orWhere('body', 'LIKE', "%$word[$i]%");
+                }
+            }
+        })->where(function($query) use ($facility) {
+            // 2.2選ばれた施設区分の数だけ繰り返して、施設区分にtrueが入っている
+            // データを抽出する
+            if(empty($facility)==false){
+                $first=0;
+                for($i=0;$i<count($facility);$i++){
+                    switch ($facility[$i]){
+                        case "park":
+                            if($first==0){
+                                $query->where('park', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('park', '=', true);
+                            }
+                            break;
+                        case "indoor_fac":
+                            if($first==0){
+                                $query->where('indoor_fac', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('indoor_fac', '=', true);
+                            }
+                            break;
+                        case "shopping":
+                            if($first==0){
+                                $query->where('shopping', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('shopping', '=', true);
+                            }
+                            break;
+                        case "shopping":
+                            if($first==0){
+                                $query->where('shopping', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('shopping', '=', true);
+                            }
+                            break;
+                        case "gourmet":
+                            if($first==0){
+                                $query->where('gourmet', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('gourmet', '=', true);
+                            }
+                            break;
+                        case "others":
+                            if($first==0){
+                                $query->where('others', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('others', '=', true);
+                            }
+                        break;
+                    }
+                }
+            }
+        })->where(function($query) use ($area) {
+            // 3.2 選択された地域で検索をします
+            if(empty($area)==false){
+                $first=0;
+                for($i=0;$i<count($area);$i++){
+                    if($first==0){
+                        $query->where('area_id', '=', $area[$i]);
+                        $first=1;
+                    }else{
+                        $query->orWhere('area_id', '=', $area[$i]);
+                    }
+                }
+            }
+        })->where(function($query) use ($dogs) {
+            // 4.犬ＯＫかで検索
+            if($dogs<100){
+                $query->where('dogs', '=', $dogs);
+            }
+        })->where(function($query) use ($age) {
+            // 5.年代で検索
+            // お勧め度が3以上のデータを検索
+            $first=0;
+            for($i=0;$i<count($age);$i++){
+                if($first==0){
+                    $query->where($age[$i], '>', 3);
+                    $first=1;
+                }else{
+                    $query->orWhere($age[$i], '>', 3);
+                }
+            }
+        })->orderBy('created_at', 'desc')->get();
+
         $user=auth()->user();
         return view('post.index', compact('posts', 'user'));
     }
@@ -48,7 +173,7 @@ class PostController extends Controller
             'image_sub2'=>'image|max:1024',
             'image_sub3'=>'image|max:1024',
             'image_sub4'=>'image|max:1024',
-            'hp_adress' =>'url',
+            // 'hp_adress' =>'url',
             'infant'    =>'numeric|between:1,5',
             'lower_grade'=>'numeric|between:1,5',
             'higher_grade'=>'numeric|between:1,5',
