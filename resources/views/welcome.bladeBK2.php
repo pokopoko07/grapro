@@ -38,24 +38,26 @@
                         }
                     }
                 @endphp
-                <div class="container_welcome w-full xl:w-3/5 py-6 overflow-y-hidden">
-                    <div class="item_w1 h-64 w-full"> 
-                        <img class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/welcome.jpg')}}">
+                <div class="container_welcome w-full xl:w-3/5 py-6 overflow-y-hidden">{{-- "h-96 container_welcome w-full xl:w-3/5 py-6 overflow-y-hidden"> --}}
+                    <div class="item_w1 w-full h-full"> {{-- relative"> --}}
+                        {{--absolute inset-0 w-full h-full object-contain mx-auto fit_grid w-5/6 mx-auto lg:mr-0 slide-in-bottom rounded-lg shadow-xl --}}
+                        <img class="mx-auto fit_grid" src="{{asset('logo/welcome.jpg')}}">
                     </div>
-                    <div class="item_w2 w-full">
-                        <img id="slideshow" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/takaitakai.jpg')}}">
+                    <div class="item_w2 w-full h-full">
+                        {{--absolute inset-0 w-full h-full object-cover mx-auto mx-auto lg:mr-0 slide-in-bottom rounded-lg shadow-xl--}}
+                        <img id="slideshow" class="mx-auto fit_grid" src="{{asset('logo/takaitakai.jpg')}}">
                     </div>
-                    <div class="item_w3 h-64 w-full">
-                        <img id="slideshow3" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/girl.jpg')}}">
+                    <div class="item_w3 w-full h-full">
+                        <img id="slideshow3" class="mx-auto fit_grid" src="{{asset('logo/girl.jpg')}}">
                     </div>
-                    <div class="item_w4 h-64 w-full">
-                        <img id="slideshow4" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/girl.jpg')}}">
+                    <div class="item_w4 w-full h-full">
+                        <img id="slideshow4" class="mx-auto fit_grid" src="{{asset('logo/girl.jpg')}}">
                     </div>
-                    <div class="item_w5 h-64 w-full">
-                        <img class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/tree.jpg')}}">
+                    <div class="item_w5 w-full h-full">
+                        <img class="mx-auto fit_grid" src="{{asset('logo/tree.jpg')}}">
                     </div>
-                    <div class="item_w6 h-64 w-full">
-                        <img id="slideshow6" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/girl.jpg')}}">
+                    <div class="item_w6 w-full h-full">
+                        <img id="slideshow6" class="mx-auto fit_grid" src="{{asset('logo/girl.jpg')}}">
                     </div>
                 </div>
             </div>

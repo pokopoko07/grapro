@@ -52,7 +52,7 @@ class PostController extends Controller
                     $query->where('title', 'LIKE', "%$word[$i]%")
                     ->orWhere('body', 'LIKE', "%$word[$i]%");
                 }else{
-                    $query->orWhere('title', 'LIKE', "%$word[$i]%")
+                    $query->where('title', 'LIKE', "%$word[$i]%")
                     ->orWhere('body', 'LIKE', "%$word[$i]%");
                 }
             }
@@ -149,7 +149,9 @@ class PostController extends Controller
         })->orderBy('created_at', 'desc')->get();
 
         $user=auth()->user();
-        return view('post.index', compact('posts', 'user'));
+
+        $count=count($posts);
+        return view('post.index', compact('posts', 'user','count'));
     }
 
     /* create 関数

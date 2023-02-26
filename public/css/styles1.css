@@ -21,8 +21,8 @@
 
 .container_syousai {	
     display: grid;
-    /* width: 600px;	
-    height: 300px; */
+    /* width: 600px; */	
+    /* height: 300px; */
     margin:1em;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;	/*何列あるか*/
     grid-template-rows: 1fr 1fr 1fr 1fr;	/*何行あるか */
@@ -68,4 +68,53 @@
 
 .item8 {
     grid-area: area8;
+}
+
+.container_welcome {	
+    display: grid;
+    /* width: 500px;*/
+    /* height: 300px; */
+    margin:1em;
+    grid-template-columns: 1fr 1fr 1fr;	/*何列あるか*/
+    grid-template-rows: 1fr 1fr 1fr;	/*何行あるか */
+    gap: 10px 10px;	
+    grid-template-areas:
+    "areaW1 areaW2 areaW2"
+    "areaW3 areaW2 areaW2"
+    "areaW4 areaW5 areaW6"; 
+}
+
+.container_welcome div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .item_w1, .item_w2, .item_w3, .item_w4, .item_w5, .item_w6{		
+    border: 1px black solid;
+} */
+
+.item_w1{
+    grid-area: areaW1;
+}
+
+.item_w2 {
+    grid-area: areaW2;
+    height: 480px;
+}
+
+.item_w3 {
+    grid-area: areaW3;
+}
+
+.item_w4 {
+    grid-area: areaW4;
+}
+
+.item_w5 {
+    grid-area: areaW5;
+}
+
+.item_w6 {
+    grid-area: areaW6;
 }

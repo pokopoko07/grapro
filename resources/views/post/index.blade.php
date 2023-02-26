@@ -10,6 +10,7 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p class="font-semibold leading-none mt-4">こんにちは、あるいは、こんばんは、{{$user->name}}さん！</p>
+        <p class="font-semibold leading-none mt-4">検索結果：{{$count}}件です</p>
         @foreach ($posts as $post)
             <div class="mx-4 sm:p-8">
                 <div class="mt-4">
@@ -30,7 +31,9 @@
                                     @endif
                                 </div>
                                 <div class="item-2">
-                                    <p class="mt-4 text-gray-600 py-4">{{$post->body}}</p>
+                                    <p class="mt-4 text-gray-600 py-4">{{Str::limit($post->body,100,"...")}}　　
+                                        <a href="{{route('post.show', $post)}}" class="text-red-500 hover:underline cursor-pointer">learn more</a>
+                                    </p>
                                 </div>
                                 <div class="item-3 border-solid border-gray-400 rounded-md">
                                     <span class="font-semibold leading-none mt-4">地域：</span>　{{$post->area->area}}
