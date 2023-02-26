@@ -33,7 +33,7 @@
                     // 取得したファイル一覧から、JPEGファイルだけをフィルタリングする
                     $jpeg_files = [];
                     foreach ($files as $file) {
-                        if (in_array($file->getExtension(), ['jpg', 'jpeg'], true)) {
+                        if (in_array($file->getExtension(), ['jpg', 'jpeg', 'JPG','JPEG'], true)) {
                             $jpeg_files[] = $file->getFilename();
                         }
                     }
