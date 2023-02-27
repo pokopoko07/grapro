@@ -34,6 +34,7 @@ require __DIR__.'/auth.php';
 
 Route::post('post/comment/store', [CommentController::class, 'store'])->name('comment.store');
 Route::post('/result',[PostController::class,'result'])->name('post.result');
+Route::post('/result_back',[PostController::class,'result_back'])->name('post.result_back');
 
 Route::resource('post', PostController::class);
 

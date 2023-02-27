@@ -19,6 +19,138 @@ class PostController extends Controller
         return view('post.serch',$param);
     }
 
+    public function result_back(Request $request, Post $posts)
+    {
+        $word           = explode(",",$request->session()->get('words'));
+        if($request->session()->get('facilitys') == -1){
+            $facility   =[];
+        }else{
+            $facility   = explode(",",$request->session()->get('facilitys'));
+        }
+
+        if($request->session()->get('areas') == -1){
+            $area       = [];
+        }else{
+            $area       = explode(",",$request->session()->get('areas'));
+        }
+
+        $dogs           = $request->session()->get('dogs');
+
+        if($request->session()->get('ages') == -1){
+            $age        = [];
+        }else{
+            $age        = explode(",",$request->session()->get('ages'));
+        }
+
+        $posts = Post::where(function($query) use ($word) {
+            // 1.2単語の数だけ、where文を作成します
+            for($i=0;$i<count($word);$i++){
+                if($i==0){
+                    $query->where('title', 'LIKE', "%$word[$i]%")
+                        ->orWhere('body', 'LIKE', "%$word[$i]%");
+                }else{
+                    $query->where('title', 'LIKE', "%$word[$i]%")
+                    ->orWhere('body', 'LIKE', "%$word[$i]%");
+                }
+            }
+        })->where(function($query) use ($facility) {
+            // 2.2選ばれた施設区分の数だけ繰り返して、施設区分にtrueが入っている
+            // データを抽出する
+            if(empty($facility)==false){
+                $first=0;
+                for($i=0;$i<count($facility);$i++){
+                    switch ($facility[$i]){
+                        case "park":
+                            if($first==0){
+                                $query->where('park', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('park', '=', true);
+                            }
+                            break;
+                        case "indoor_fac":
+                            if($first==0){
+                                $query->where('indoor_fac', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('indoor_fac', '=', true);
+                            }
+                            break;
+                        case "shopping":
+                            if($first==0){
+                                $query->where('shopping', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('shopping', '=', true);
+                            }
+                            break;
+                        case "shopping":
+                            if($first==0){
+                                $query->where('shopping', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('shopping', '=', true);
+                            }
+                            break;
+                        case "gourmet":
+                            if($first==0){
+                                $query->where('gourmet', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('gourmet', '=', true);
+                            }
+                            break;
+                        case "others":
+                            if($first==0){
+                                $query->where('others', '=', true);
+                                $first=1;
+                            }else{
+                                $query->orWhere('others', '=', true);
+                            }
+                        break;
+                    }
+                }
+            }
+        })->where(function($query) use ($area) {
+            // 3.2 選択された地域で検索をします
+            if(empty($area)==false){
+                $first=0;
+                for($i=0;$i<count($area);$i++){
+                    if($first==0){
+                        $query->where('area_id', '=', $area[$i]);
+                        $first=1;
+                    }else{
+                        $query->orWhere('area_id', '=', $area[$i]);
+                    }
+                }
+            }
+        })->where(function($query) use ($dogs) {
+            // 4.犬ＯＫかで検索
+            if($dogs<100){
+                $query->where('dogs', '=', $dogs);
+            }
+        })->where(function($query) use ($age) {
+            // 5.年代で検索
+            // お勧め度が3以上のデータを検索
+            $first=0;
+            if(empty($age)==false){
+                for($i=0;$i<count($age);$i++){
+                    if($first==0){
+                        $query->where($age[$i], '>', 3);
+                        $first=1;
+                    }else{
+                        $query->orWhere($age[$i], '>', 3);
+                    }
+                }
+            }
+        })->orderBy('created_at', 'desc')->get();
+
+        $user=auth()->user();
+
+        $count=count($posts);
+        return view('post.index', compact('posts', 'user','count'));
+    }
+
     public function result(Request $request)
     {
         // 1.単語検索
@@ -26,31 +158,49 @@ class PostController extends Controller
         $word = str_replace('、', ',', $request->word);
         $word = str_replace(' ',  ',', $word);
         $word = str_replace('　',  ',', $word);
+
+        $request->session()->put('words',$word);//セッションに単語検索の単語を入れる
         $word = explode(",",$word);
         for($i=0;$i<count($word);$i++){
             $word[$i]=trim($word[$i]);
         }
-
+        
         // 2.施設区分で検索
         // 2.1 得られたデータをわかりやすく変数に入れます
         $facility   = $request->facility_name;
+        if (empty($facility)){
+            $request->session()->put('facilitys', -1);
+        }else{
+            $request->session()->put('facilitys',implode(',', $facility));//セッションに施設区分を入れます
+        }
 
         // 3.地域で検索
         // 3.1　得られたデータをわかりやすく変数に入れます
         $area       = $request->area_name;
+        if (empty($area)){
+            $request->session()->put('areas', -1);
+        }else{
+            $request->session()->put('areas',implode(',', $area));//セッションに地域を入れます
+        }
 
         // 4.犬ＯＫかで検索
         $dogs       = $request->dogs;
+        $request->session()->put('dogs',$dogs);//セッションに犬OKを入れます
 
         // 5.年代で検索
         $age        = $request->age_name;
+        if (empty($age)){
+            $request->session()->put('ages', -1);
+        }else{
+            $request->session()->put('ages',implode(',', $age));//セッションに地域を入れます
+        }
 
-        $posts      = Post::where(function($query) use ($word) {
+        $posts = Post::where(function($query) use ($word) {
             // 1.2単語の数だけ、where文を作成します
             for($i=0;$i<count($word);$i++){
                 if($i==0){
                     $query->where('title', 'LIKE', "%$word[$i]%")
-                    ->orWhere('body', 'LIKE', "%$word[$i]%");
+                        ->orWhere('body', 'LIKE', "%$word[$i]%");
                 }else{
                     $query->where('title', 'LIKE', "%$word[$i]%")
                     ->orWhere('body', 'LIKE', "%$word[$i]%");

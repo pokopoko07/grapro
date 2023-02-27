@@ -16,12 +16,12 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <div class="w-full container mx-auto p-6">
+        <div class="w-full container mx-auto p-2 bg-red-100">
             <div class="w-full flex items-center justify-between">
                 <a href="{{route('top')}}">
-                    <img src="{{asset('logo/arakashi_logo.png')}}"  style="max-height:80px;">
+                    <img src="{{asset('logo/arakashi_logo2.png')}}"  style="max-height:80px;">
                 </a>
-                <div class="w-full container mx-auto p-6">
+                <div class="w-full container mx-auto p-2">
                     <div class="w-full flex items-center justify-between">
                 <div class="flex w-1/2 justify-end content-center">
                     {{-- ログイン・登録部分 --}}

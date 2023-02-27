@@ -16,7 +16,8 @@
                     <div class="mt-4">
                         {{-- 施設名表示 --}}
                         <h1 class="text-4xl text-gray-700 font-semibold hover:underline cursor-pointer">
-                            <a href="{{route('post.show', $post)}}">{{ $post->title }}</a>
+                            {{-- <a href="{{route('post.show', $post)}}">{{ $post->title }}</a> --}}
+                            {{ $post->title }}
                         </h1>
 
                         <div class="flex justify-end mt-4">
@@ -45,7 +46,7 @@
 
                         {{--本文表示--}}
                         <div class="item2">
-                            <p class="mt-4 text-gray-600 py-4">{{$post->body}}</p>
+                            <p class="mt-4 text-gray-600 py-4">{!! nl2br(e($post->body)) !!}<p> {{--{{$post->body}}</p> --}}
                              @if($post->hp_adress)
                                 <div class="text-sm font-semibold flex flex-row-reverse">
                                     <p> HP:<a href="{{ $post->hp_adress }}" target="_blank">{{ $post->hp_adress }}</a></p>
@@ -118,6 +119,18 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+
+                {{-- 前画面に戻る --}}
+                <div class="flex justify-end mt-4">
+                    <x-primary-button class="bg-gray-400 float-right mr-4 mb-12" onClick="history.back();">前の画面に戻る</x-primary-button>
+                    <form method="post" action="{{route('post.result_back', $post)}}">
+                        @csrf
+                        <x-primary-button type="submit" class="bg-teal-700 float-right">前の画面に戻る</x-primary-button>
+                        {{-- <x-primary-button class="bg-teal-700 float-right">前の画面に戻る</x-primary-button> --}}
+                    </form>
+                        {{-- <a href="{{route('post.result_back', $post)}}"><x-primary-button class="bg-teal-700 float-right">前の画面に戻る</x-primary-button></a>               
+                        --}}
                 </div>
 
                 {{-- コメント部分 --}}

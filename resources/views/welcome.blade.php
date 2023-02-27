@@ -1,7 +1,7 @@
 <x-guest-layout>
     <body class="antialiased">
         <div class="h-screen pb-14 bg-right bg-cover">
-            <div class="container pt-10 md:pt-18 px-6 mx-auto flex flex-col md:flex-row items-center bg-white-100">
+            <div class="container pt-2 md:pt-18 px-6 mx-auto flex flex-col md:flex-row items-center bg-green-100">
                 <!--左側-->
                 <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden ">
                     <h1 class="my-4 text-3xl md:text-5xl text-black-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">アラカシ</h1>
@@ -39,23 +39,23 @@
                     }
                 @endphp
                 <div class="container_welcome w-full xl:w-3/5 py-6 overflow-y-hidden">
-                    <div class="item_w1 h-64 w-full"> 
-                        <img class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/welcome.jpg')}}">
+                    <div class="item_w1 h-32 w-full"> 
+                        <img class="h-full w-full object-contain lg:mr-0" src="{{asset('logo/welcome.jpg')}}">
                     </div>
                     <div class="item_w2 w-full">
                         <img id="slideshow" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/takaitakai.jpg')}}">
                     </div>
-                    <div class="item_w3 h-64 w-full">
+                    <div class="item_w3 h-32 w-full">
                         <img id="slideshow3" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/girl.jpg')}}">
                     </div>
-                    <div class="item_w4 h-64 w-full">
-                        <img id="slideshow4" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/girl.jpg')}}">
+                    <div class="item_w4 h-32 w-full">
+                        <img id="slideshow4" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/girl2.jpg')}}">
                     </div>
-                    <div class="item_w5 h-64 w-full">
-                        <img class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/tree.jpg')}}">
+                    <div class="item_w5 h-32 w-full">
+                        <img class="h-full w-full object-contain lg:mr-0" src="{{asset('logo/tree.jpg')}}">
                     </div>
-                    <div class="item_w6 h-64 w-full">
-                        <img id="slideshow6" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/girl.jpg')}}">
+                    <div class="item_w6 h-32 w-full">
+                        <img id="slideshow6" class="h-full w-full object-cover lg:mr-0" src="{{asset('logo/tetunagi.jpg')}}">
                     </div>
                 </div>
             </div>
