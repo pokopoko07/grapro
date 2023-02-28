@@ -17,7 +17,7 @@
                     <div class="bg-white w-full  rounded-2xl px-10 py-8 shadow-lg hover:shadow-2xl transition duration-500">
                         <div class="mt-4">
                             <h1 class="text-lg text-gray-700 font-semibold hover:underline cursor-pointer">
-                                <a href="{{route('post.show', $post, $posts)}}">{{ $post->title }}</a>
+                                <a href="{{route('post.show', $post)}}">{{ $post->title }}</a>
                             </h1>
                             <hr class="w-full"><br>
 
@@ -37,11 +37,16 @@
                                 </div>
                                 <div class="item-3 border-solid border-gray-400 rounded-md">
                                     <span class="font-semibold leading-none mt-4">地域：</span>　{{$post->area->area}}
+                                    <br>
+                                    <span class="font-semibold leading-none mt-4">犬：</span>　{{$post->getDogsStr()}}
                                 </div>
                                 <div class="item-4 border-solid border-gray-400 rounded-md">
                                     <span class="font-semibold leading-none mt-4">施設区分:</span>　{{$post->getFacilityKubun()}}
+                                    <div class="text-sm font-semibold flex flex-row-reverse">
+                                        <p> {{ $post->user->name }} • {{$post->created_at->diffForHumans()}}</p>
+                                    </div>
                                 </div>
-                                <div class="item-5 border-solid border-gray-400 rounded-md">
+                                {{-- <div class="item-5 border-solid border-gray-400 rounded-md">
                                     <span class="font-semibold leading-none mt-4">犬：</span>　{{$post->getDogsStr()}}
                                     <br><br><br><br>
                                     <div class="text-sm font-semibold flex flex-row-reverse">
@@ -56,7 +61,7 @@
                                         <li>小学生高学年：{{$post->getAgeStr($post->higher_grade)}}</li>
                                         <li>中学生以上　：{{$post->getAgeStr($post->over13)}}</li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
 
 

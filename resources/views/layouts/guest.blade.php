@@ -16,7 +16,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <div class="w-full container mx-auto p-2 bg-red-100">
+        <div class="w-full container mx-auto p-2 bg-white-100">
             <div class="w-full flex items-center justify-between">
                 <a href="{{route('top')}}">
                     <img src="{{asset('logo/arakashi_logo2.png')}}"  style="max-height:80px;">

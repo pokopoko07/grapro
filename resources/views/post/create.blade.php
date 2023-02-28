@@ -53,7 +53,11 @@
                         <label for="areas_id" class="font-semibold leading-none mt-4">地域</label>
                         <select name="areas" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="areas_id">
                             @foreach($items_a as $item_a)
-                                <option value="{{$item_a->id}}">{{$item_a->area}}</option>
+                                @if($item_a->id == old('areas'))
+                                    <option value="{{$item_a->id}}" selected>{{$item_a->area}}</option>
+                                @else
+                                    <option value="{{$item_a->id}}">{{$item_a->area}}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -63,19 +67,24 @@
                         <ul id="areas_id">
                             <li>
                                 <label class="leading-none mt-4">
-                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="park" checked>公園
+                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="park" 
+                                    @if(empty(old('facility'))) checked @else @if(in_array("park", old('facility'))) checked @endif @endif>公園
                                 </label>
                                 <label class="leading-none mt-4">
-                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="indoor_fac">屋内施設
+                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="indoor_fac" 
+                                    @if(in_array("indoor_fac", old('facility', []))) checked @endif>屋内施設
                                 </label>
                                 <label class="leading-none mt-4">
-                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="shopping">買物
+                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="shopping" 
+                                    @if(in_array("shopping", old('facility', []))) checked @endif>買物
                                 </label>
                                 <label class="leading-none mt-4">
-                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="gourmet">グルメ
+                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="gourmet" 
+                                    @if(in_array("gourmet", old('facility', []))) checked @endif>グルメ
                                 </label>
                                 <label class="leading-none mt-4">
-                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="others">その他
+                                    <input type="checkbox" name="facility[]" class="placeholder-gray-300 border border-gray-300 rounded-md" value="others" 
+                                    @if(in_array("others", old('facility', []))) checked @endif>その他
                                 </label>
                             </li>
                         </ul>
@@ -99,9 +108,9 @@
                     <div class="w-full flex flex-col">
                         <label for="dog_id" class="font-semibold leading-none mt-4">犬OK？</label>
                         <ul id="dog_id">
-                            <li><label>ＮＧ:<input type="radio" name="dogs" value=0></label></li>
-                            <li><label>ＯＫ:<input type="radio" name="dogs" value=1></label></li>
-                            <li><label>不明:<input type="radio" name="dogs" value=99 checked></label></li>
+                            <li><label>ＮＧ:<input type="radio" name="dogs" value=1 @if(old('dogs')==1) checked @endif></label></li>
+                            <li><label>ＯＫ:<input type="radio" name="dogs" value=2 @if(old('dogs')==2) checked @endif></label></li>
+                            <li><label>不明:<input type="radio" name="dogs" value=99 @if(empty(old('dogs'))) checked @else @if(old('dogs')==99) checked @endif @endif></label></li>
                         </ul>
                     </div>
 

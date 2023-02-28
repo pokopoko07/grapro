@@ -46,8 +46,8 @@
                             <td>
                                 <div class="w-full flex flex-row  mt-8">
                                     <label class="ml-4">全て:<input type="radio" name="dogs" value=100 checked></label>
-                                    <label class="ml-4">ＮＧ:<input type="radio" name="dogs" value=0></label>
-                                    <label class="ml-4">ＯＫ:<input type="radio" name="dogs" value=1></label>
+                                    <label class="ml-4">ＮＧ:<input type="radio" name="dogs" value=1></label>
+                                    <label class="ml-4">ＯＫ:<input type="radio" name="dogs" value=2></label>
                                     <label class="ml-4">不明:<input type="radio" name="dogs" value=99></label>
                                 </div>
                             </td>

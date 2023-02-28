@@ -75,10 +75,10 @@ class Post extends Model
     public function getDogsStr(){
         $str="";
         switch($this->dogs){
-            case 0:
+            case 1:
                 $str="NG";
                 break;
-            case 1:
+            case 2:
                 $str="OK";
                 break;
             default:

@@ -123,14 +123,11 @@
 
                 {{-- 前画面に戻る --}}
                 <div class="flex justify-end mt-4">
-                    <x-primary-button class="bg-gray-400 float-right mr-4 mb-12" onClick="history.back();">前の画面に戻る</x-primary-button>
                     <form method="post" action="{{route('post.result_back', $post)}}">
                         @csrf
                         <x-primary-button type="submit" class="bg-teal-700 float-right">前の画面に戻る</x-primary-button>
                         {{-- <x-primary-button class="bg-teal-700 float-right">前の画面に戻る</x-primary-button> --}}
                     </form>
-                        {{-- <a href="{{route('post.result_back', $post)}}"><x-primary-button class="bg-teal-700 float-right">前の画面に戻る</x-primary-button></a>               
-                        --}}
                 </div>
 
                 {{-- コメント部分 --}}
